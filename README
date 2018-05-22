@@ -1,0 +1,7 @@
+#Deploy en Heroku
+
+##gunicorn
+Es necesario el archivo procfile para definir dyno (web) o procesadores de la instancia en heroku
+
+##Pepenv
+Es un gestor de packetes o manager packages como es en npm en Node o bundle en Ruby, y permite aislar los proyectos en ambientes independientes con virtualenv, permitiendo exportar a diferentes instancias.
