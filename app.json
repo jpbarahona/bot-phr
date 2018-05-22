@@ -2,6 +2,7 @@
   "name": "bot-phr",
   "description": "Demo",
   "scripts": {
+    "postdeploy": "pipenv run python src/server.py"
   },
   "env": {
   },
