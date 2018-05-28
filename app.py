@@ -2,13 +2,16 @@
 """Example bot that returns a synchronous response."""
 
 from flask import Flask, request, json
+import src.mongo.hangouts as hangouts
 
 app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def on_event():
-  """Handles an event from Hangouts Chat."""
   event = request.get_json()
+  
+  hangouts.guardarMensaje(event)
+
   if event['type'] == 'ADDED_TO_SPACE' and event['space']['type'] == 'ROOM':
     text = 'Thanks for adding me to "%s"!' % event['space']['displayName']
   elif event['type'] == 'MESSAGE':

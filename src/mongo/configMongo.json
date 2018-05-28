@@ -1,0 +1,10 @@
+{
+	"api": {
+		"db": "bot-test",
+		"hangouts": {
+			"collections":{
+				"messages": "hangouts_event_messages"
+			}
+		}
+	}
+}

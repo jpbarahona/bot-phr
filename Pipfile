@@ -8,6 +8,7 @@ flask = "*"
 procfile = "*"
 gunicorn = "*"
 request = "*"
+pymongo = {extras = ["srv"]}
 
 [dev-packages]
 
