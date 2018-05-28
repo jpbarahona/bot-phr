@@ -1,0 +1,9 @@
+{
+	"scope": ["https://www.googleapis.com/auth/drive.readonly"],
+	"archivo":{
+		"credencialesSFSF":{
+			"sheet": "Test SFSF Accesos",
+			"workSheet": "SFSF"
+		}
+	}
+}
