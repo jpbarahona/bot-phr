@@ -16,72 +16,63 @@ worksheet = sheet.worksheet(config['archivo']['credencialesSFSF']['workSheet'])
 
 wsheet = worksheet.get_all_values()
 
-# header -> primera fila es un comentario
-df = pandas.DataFrame.from_records(wsheet[1:])
-
-# .values -> array o matriz
-header = (df.loc[df[0] == 'Cliente']).values[0]
-dataSet = (df.loc[df[0] != 'Cliente']).values
-
-dff = pandas.DataFrame.from_records(dataSet, columns = header)
-
 # out json
 def outCardsCredencialesSFSF(payload):
     cards = []
 
-    print(len(payload))
-
     for index, row in payload.iterrows():
         cards.append(
             {
-                    'header': {
-                        'title': 'Arauco',
-                        'subtitle': row.Cliente
-                      },
-                      'sections': [
-                        {
-                          'widgets': [
-                                {
-                                'buttons': [
-                                        {
-                                          'textButton': {
-                                            'text': 'Link '+ row['Tipo Acceso'],
-                                            'onClick': {
-                                              'openLink': {
-                                                'url': row.Link
-                                              }
-                                            }
-                                          }
+              'header': {
+                  'title': row.Cliente,
+                  'subtitle': 'Company ID: '+row['Company ID']
+                },
+                'sections': [
+                  {
+                    'widgets': [
+                          {
+                          'buttons': [
+                                  {
+                                    'textButton': {
+                                      'text': 'Link '+ row['Tipo Acceso'],
+                                      'onClick': {
+                                        'openLink': {
+                                          'url': row.Link
                                         }
-                                    ]
-                                },
-                                {
-                                    'keyValue': {
-                                      'topLabel': 'Usuario',
-                                      'content': row.Usuario
+                                      }
                                     }
-                                },
-                                {
-                                    'keyValue': {
-                                      'topLabel': 'Contraseña',
-                                      'content': row.Contraseña
-                                    }
-                                },
-                                {
-                                    'keyValue': {
-                                      'topLabel': 'Company ID',
-                                      'content': row['Company ID']
-                                    }
-                                }
-                          ]
-                        }
-                      ]
-                    }
+                                  }
+                              ]
+                          },
+                          {
+                              'keyValue': {
+                                'topLabel': 'Usuario',
+                                'content': row.Usuario
+                              }
+                          },
+                          {
+                              'keyValue': {
+                                'topLabel': 'Contraseña',
+                                'content': row.Contraseña
+                              }
+                          }
+                    ]
+                  }
+                ]
+              }
         )
 
     return cards
 
-def BuscarCredenciales (cliente, ambiente = ''):
+def BuscarCredenciales (cliente, ambiente = ''): 
+  # header -> primera fila es un comentario
+  df = pandas.DataFrame.from_records(wsheet[1:])
+
+  # .values -> array o matriz
+  header = (df.loc[df[0] == 'Cliente']).values[0]
+  dataSet = (df.loc[df[0] != 'Cliente']).values
+
+  dff = pandas.DataFrame.from_records(dataSet, columns = header)
   cliente = dff.Cliente.str.upper() == cliente.upper()
 
   if (ambiente != ''):
