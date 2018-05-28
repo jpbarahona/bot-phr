@@ -26,11 +26,12 @@ dataSet = (df.loc[df[0] != 'Cliente']).values
 dff = pandas.DataFrame.from_records(dataSet, columns = header)
 
 # out json
-def _outCardsCredencialesSFSF(payload):
+def outCardsCredencialesSFSF(payload):
     cards = []
-    result = payload
 
-    for index, row in result.iterrows():
+    print(len(payload))
+
+    for index, row in payload.iterrows():
         cards.append(
             {
                     'header': {
@@ -77,17 +78,15 @@ def _outCardsCredencialesSFSF(payload):
                       ]
                     }
         )
-        
+
     return cards
 
 def BuscarCredenciales (cliente, ambiente = ''):
-	cliente = dff.Cliente == cliente
+  cliente = dff.Cliente.str.upper() == cliente.upper()
 
-	config.close()
+  if (ambiente != ''):
+    ambiente = dff['Tipo Acceso'].str.upper() == ambiente.upper()
 
-	if (ambiente != ''):
-		ambiente = dff['Tipo Acceso'] == ambiente
-
-		return _outCardsCredencialesSFSF(dff.loc[cliente & ambiente])
-	else:
-		return _outCardsCredencialesSFSF(dff.loc[cliente])
+    return outCardsCredencialesSFSF(dff.loc[cliente & ambiente])
+  else:        
+    return outCardsCredencialesSFSF(dff.loc[cliente])

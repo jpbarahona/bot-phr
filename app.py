@@ -11,16 +11,15 @@ app = Flask(__name__)
 
 def on_event():
   event = request.get_json()
-  
   #hangouts.guardarMensaje(event)
 
   if event['type'] == 'ADDED_TO_SPACE' and event['space']['type'] == 'ROOM':
-    return json.jsonify({text: 'Thanks for adding me to "%s"!' % event['space']['displayName']})
+    print( 'Thanks for adding me to "%s"!' % event['space']['displayName'])
   elif event['type'] == 'MESSAGE':
     text = event['message']['text']
   else:
     return
-  return json.jsonify( {'cards': bc.BuscarCredenciales(text)} )
+  return json.jsonify({'cards': bc.BuscarCredenciales(text)})
 
 if __name__ == '__main__':
   app.run()
