@@ -78,7 +78,7 @@ def _outCardsCredencialesSFSF(payload):
                     }
         )
         
-    return {'cards':cards}
+    return cards
 
 def BuscarCredenciales (cliente, ambiente = ''):
 	cliente = dff.Cliente == cliente
