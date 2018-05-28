@@ -9,6 +9,10 @@ procfile = "*"
 gunicorn = "*"
 request = "*"
 pymongo = {extras = ["srv"]}
+"oauth2client" = "*"
+gspread = "*"
+pandas = "*"
+so = "*"
 
 [dev-packages]
 
