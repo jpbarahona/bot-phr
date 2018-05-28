@@ -53,19 +53,7 @@ def on_event():
 					                  'topLabel': 'Company ID',
 					                  'content': 'C000000000'
 					                }
-					              },
-					             	'buttons': [
-									{
-					                  'textButton': {
-					                      'text': 'Link',
-					                      'onClick': {
-						                      'openLink': {
-						                        'url': 'https://google.com/'
-						                      }
-					                      }
-					                  }
-					                }
-								]
+					              }
 					          ]
 					        }
 					      ]
