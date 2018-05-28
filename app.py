@@ -4,6 +4,65 @@
 from flask import Flask, request, json
 import src.mongo.hangouts as hangouts
 
+cliente = 'd'
+ambiente = 'prd'
+link = 'https://google.com'
+usuario = 'dsadas'
+password = 'dsadsda'
+companyId = 'C000000'
+
+i = 0
+a = []
+
+while (i < 2):
+	a.append(json.dumps({
+				'header': {
+			        'title': 'Arauco',
+			        'subtitle': cliente
+			      },
+			      'sections': [
+			        {
+			          'widgets': [
+			          		{
+			          		'buttons': [
+				                	{
+					                  'textButton': {
+					                    'text': 'Link '+ ambiente,
+					                    'onClick': {
+					                      'openLink': {
+					                        'url': link
+					                      }
+					                    }
+					                  }
+					                }
+				              	]
+							},
+							{
+								'keyValue': {
+								  'topLabel': 'Usuario',
+								  'content': usuario
+								}
+							},
+							{
+								'keyValue': {
+								  'topLabel': 'Contrasena',
+								  'content': password
+								}
+							},
+							{
+								'keyValue': {
+								  'topLabel': 'Company ID',
+								  'content': companyId
+								}
+							}
+			          ]
+			        }
+			      ]
+			    }
+			)
+	)
+	i = i + 1
+
 app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
@@ -20,94 +79,10 @@ def on_event():
   else:
     return
   return json.jsonify(
-					  	{
-					  'cards': [
-					    {
-					      'header': {
-					        'title': 'Arauco',
-					        'subtitle': 'PRD'
-					      },
-					      'sections': [
-					        {
-					          'widgets': [
-					          		{"buttons": [
-						                {
-						                  "textButton": {
-						                    "text": "Link PRD",
-						                    "onClick": {
-						                      "openLink": {
-						                        "url": "https://google.com"
-						                      }
-						                    }
-						                  }
-						                }
-						              ]},
-					              {
-					                'keyValue': {
-					                  'topLabel': 'Usuario',
-					                  'content': 'phr'
-					                }
-					              },
-					              {
-					                'keyValue': {
-					                  'topLabel': 'Contraseña',
-					                  'content': 'dsa'
-					                }
-					              },
-					              {
-					                'keyValue': {
-					                  'topLabel': 'Company ID',
-					                  'content': 'C000000000'
-					                }
-					              }
-					          ]
-					        }
-					      ]
-					    },{
-					      'header': {
-					        'title': 'Arauco',
-					        'subtitle': 'TST'
-					      },
-					      'sections': [
-					        {
-					          'widgets': [
-					          		{"buttons": [
-						                {
-						                  "textButton": {
-						                    "text": "Link TST",
-						                    "onClick": {
-						                      "openLink": {
-						                        "url": "https://google.com"
-						                      }
-						                    }
-						                  }
-						                }
-						              ]},
-					              {
-					                'keyValue': {
-					                  'topLabel': 'Usuario',
-					                  'content': 'phr'
-					                }
-					              },
-					              {
-					                'keyValue': {
-					                  'topLabel': 'Contraseña',
-					                  'content': 'dsa'
-					                }
-					              },
-					              {
-					                'keyValue': {
-					                  'topLabel': 'Company ID',
-					                  'content': 'C000000000'
-					                }
-					              }
-					          ]
-					        }
-					      ]
-					    }
-					  ]
+					{
+					  'cards': a
 					}
-  	)
+  				)
 
 if __name__ == '__main__':
   app.run()
