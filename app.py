@@ -15,7 +15,7 @@ i = 0
 a = []
 
 while (i < 2):
-	a.append(json.dumps({
+	a.append({
 				'header': {
 			        'title': 'Arauco',
 			        'subtitle': cliente
@@ -60,7 +60,6 @@ while (i < 2):
 			      ]
 			    }
 			)
-	)
 	i = i + 1
 
 app = Flask(__name__)
