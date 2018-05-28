@@ -25,17 +25,64 @@ def on_event():
 					    {
 					      'header': {
 					        'title': 'Arauco',
-					        'subtitle': 'Credenciales'
+					        'subtitle': 'PRD'
 					      },
 					      'sections': [
 					        {
 					          'widgets': [
+					          		{"buttons": [
+						                {
+						                  "textButton": {
+						                    "text": "Link PRD",
+						                    "onClick": {
+						                      "openLink": {
+						                        "url": "https://google.com"
+						                      }
+						                    }
+						                  }
+						                }
+						              ]},
 					              {
 					                'keyValue': {
-					                  'topLabel': 'Ambiente',
-					                  'content': 'PRD'
-					                  }
+					                  'topLabel': 'Usuario',
+					                  'content': 'phr'
+					                }
 					              },
+					              {
+					                'keyValue': {
+					                  'topLabel': 'Contraseña',
+					                  'content': 'dsa'
+					                }
+					              },
+					              {
+					                'keyValue': {
+					                  'topLabel': 'Company ID',
+					                  'content': 'C000000000'
+					                }
+					              }
+					          ]
+					        }
+					      ]
+					    },{
+					      'header': {
+					        'title': 'Arauco',
+					        'subtitle': 'TST'
+					      },
+					      'sections': [
+					        {
+					          'widgets': [
+					          		{"buttons": [
+						                {
+						                  "textButton": {
+						                    "text": "Link TST",
+						                    "onClick": {
+						                      "openLink": {
+						                        "url": "https://google.com"
+						                      }
+						                    }
+						                  }
+						                }
+						              ]},
 					              {
 					                'keyValue': {
 					                  'topLabel': 'Usuario',
