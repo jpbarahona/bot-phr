@@ -74,26 +74,42 @@ def outCardsCredencialesSFSF(payload):
     return {'cards': cards}
 
 def BuscarCredenciales (pCliente, pAmbiente = ''): 
+
   # case = false, no sensitive case
-  cliente = dff.Cliente.str.contains(pCliente, case=False)
+  cliente = dff.Cliente.str.contains(cliente, case=False)
+  isPassword = dff['Contraseña'] != ''
+  
+  cliente_isPassword = (cliente & isPassword)
 
   if (pAmbiente != ''):
+    
     ambiente = dff['Tipo Acceso'].str.contains(pAmbiente, case=False)
+    ci_ambiente = (cliente_isPassword & ambiente)
 
-    if (len(dff.loc[cliente & ambiente]) <= 6 and len(dff.loc[cliente & ambiente]) > 0):
-      return outCardsCredencialesSFSF(dff.loc[cliente & ambiente]) 
-    elif len(dff.loc[cliente & ambiente]) >= 7:
+    if (len(dff.loc[ci_ambiente]) <= 6 and len(dff.loc[ci_ambiente]) > 0):
+      
+      return outCardsCredencialesSFSF(dff.loc[ci_ambiente]).drop_duplicates('Tipo Acceso')
+
+    elif len(dff.loc[ci_ambiente]) >= 7:
+      
       return {'text': 'Srry hay muchas credenciales y aún soy incapaz de mostrarlas'}
+
     else:
+
       return {'text': 'Wut? Aún no entiendo'}
+
       #return {'text': 'Existen muchas credenciales de %s para %s' % (dff.loc[cliente & ambiente]['Tipo Acceso'].iloc[0], dff.loc[cliente].Cliente.iloc[0]) }
 
   else: 
 
-    if (len(dff.loc[cliente]) <= 6 and len(dff.loc[cliente]) > 0):
-      return outCardsCredencialesSFSF(dff.loc[cliente])
-    elif len(dff.loc[cliente]) >= 7:
-      return {'text': 'Srry hay muchas credenciales para %s y aún soy incapaz de mostrarlas' % (dff.loc[cliente].Cliente.iloc[0])}
+    if (len(dff.loc[cliente_isPassword]) <= 6 and len(dff.loc[cliente_isPassword]) > 0):
+
+      return outCardsCredencialesSFSF(dff.loc[cliente_isPassword]).drop_duplicates('Tipo Acceso')
+      
+    elif len(dff.loc[cliente_isPassword]) >= 7:
+
+      return {'text': 'Srry hay muchas credenciales para %s y aún soy incapaz de mostrarlas' % (dff.loc[cliente_isPassword].Cliente.iloc[0])}
+
     else:
       return {'text': 'Wut? Aún no entiendo'}
       #return {'text': 'Existen muchas credenciales para %s, especifica si necesitas DEV TST o PRD' % (dff.loc[cliente].Cliente.iloc[0])}       
