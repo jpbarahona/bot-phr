@@ -15,7 +15,7 @@ def on_event():
   #hangouts.guardarMensaje(event)
 
   if event['type'] == 'ADDED_TO_SPACE' and event['space']['type'] == 'ROOM':
-    return json.jsonify({'text': 'Hola! Por ahora, solo puedo ayudar con credenciales de SFSF... algunas... debido a la densidad de usuarios en algunos clientes, iré mejorando durante los días'})
+    return json.jsonify({'text': 'Hola! Por ahora, solo puedo ayudar con credenciales de SFSF... Preguntas como entel, abastible, arauco, etc...'})
   elif event['type'] == 'MESSAGE':
     text = event['message']['text']
   else:
