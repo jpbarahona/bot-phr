@@ -86,30 +86,26 @@ def BuscarCredenciales (pCliente, pAmbiente = ''):
     ambiente = dff['Tipo Acceso'].str.contains(pAmbiente, case=False)
     ci_ambiente = (cliente_isPassword & ambiente)
 
-    if (len(dff.loc[ci_ambiente]) <= 6 and len(dff.loc[ci_ambiente]) > 0):
-      
-      return outCardsCredencialesSFSF(dff.loc[ci_ambiente]).drop_duplicates('Tipo Acceso')
+    rowDff = dff.loc[ci_ambiente]
+    lenDff = len(rowDff)
 
-    elif len(dff.loc[ci_ambiente]) >= 7:
-      
+    if (lenDff <= 6 and lenDff > 0):
+      return outCardsCredencialesSFSF(rowDff).drop_duplicates('Tipo Acceso')
+    elif lenDff >= 7:
       return {'text': 'Srry hay muchas credenciales y aún soy incapaz de mostrarlas'}
-
     else:
-
       return {'text': 'Wut? Aún no entiendo'}
-
       #return {'text': 'Existen muchas credenciales de %s para %s' % (dff.loc[cliente & ambiente]['Tipo Acceso'].iloc[0], dff.loc[cliente].Cliente.iloc[0]) }
-
+      
   else: 
 
-    if (len(dff.loc[cliente_isPassword]) <= 6 and len(dff.loc[cliente_isPassword]) > 0):
+    rowDff = dff.loc[cliente_isPassword]
+    lenDff = len(rowDff)
 
-      return outCardsCredencialesSFSF(dff.loc[cliente_isPassword]).drop_duplicates('Tipo Acceso')
-      
-    elif len(dff.loc[cliente_isPassword]) >= 7:
-
-      return {'text': 'Srry hay muchas credenciales para %s y aún soy incapaz de mostrarlas' % (dff.loc[cliente_isPassword].Cliente.iloc[0])}
-
+    if (lenDff <= 6 and lenDff > 0):
+      return outCardsCredencialesSFSF(rowDff).drop_duplicates('Tipo Acceso')
+    elif lenDff >= 7:
+      return {'text': 'Srry hay muchas credenciales para %s y aún soy incapaz de mostrarlas' % (rowDff.Cliente.iloc[0])}
     else:
       return {'text': 'Wut? Aún no entiendo'}
       #return {'text': 'Existen muchas credenciales para %s, especifica si necesitas DEV TST o PRD' % (dff.loc[cliente].Cliente.iloc[0])}       
