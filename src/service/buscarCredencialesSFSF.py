@@ -64,6 +64,12 @@ def outCardsCredencialesSFSF(payload):
                                 'topLabel': 'Contraseña',
                                 'content': row.Contraseña
                               }
+                          },
+                          {
+                              'keyValue': {
+                                'topLabel': 'Comentario',
+                                'content': row[''] if row[''] != '' else '.' 
+                              }
                           }
                     ]
                   }
@@ -76,11 +82,12 @@ def outCardsCredencialesSFSF(payload):
 def BuscarCredenciales (pCliente, pAmbiente = ''): 
 
   # case = false, no sensitive case
-  cliente = dff.Cliente.str.contains(pCliente, case=False)
+  cliente    = dff['Cliente'].str.contains(pCliente, case=False)
   isPassword = dff['Contraseña'] != ''
   comentario = ~dff[''].str.contains('no funciona', case=False)
+  isLink     = dff['Link'] != ''
   
-  cliente_isPassword_comentario = (cliente & isPassword & comentario)
+  cliente_isPassword_comentario = (cliente & isPassword & comentario & isLink)
 
   if (pAmbiente != ''):
     
