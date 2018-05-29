@@ -64,6 +64,12 @@ def outCardsCredencialesSFSF(payload):
                                 'topLabel': 'Contraseña',
                                 'content': row.Contraseña
                               }
+                          },
+                          {
+                              'keyValue': {
+                                'topLabel': 'Comentario',
+                                'content': row['']
+                              }
                           }
                     ]
                   }
@@ -78,32 +84,33 @@ def BuscarCredenciales (pCliente, pAmbiente = ''):
   # case = false, no sensitive case
   cliente = dff.Cliente.str.contains(pCliente, case=False)
   isPassword = dff['Contraseña'] != ''
+  comentario = ~dff[''].str.contains('no funciona', case=False)
   
-  cliente_isPassword = (cliente & isPassword)
+  cliente_isPassword_comentario = (cliente & isPassword & comentario)
 
   if (pAmbiente != ''):
     
     ambiente = dff['Tipo Acceso'].str.contains(pAmbiente, case=False)
-    ci_ambiente = (cliente_isPassword & ambiente)
+    ci_ambiente = (cliente_isPassword_comentario & ambiente)
 
-    rowDff = dff.loc[ci_ambiente]
+    rowDff = dff.loc[ci_ambiente].drop_duplicates(['Cliente','Tipo Acceso'])
     lenDff = len(rowDff)
 
     if (lenDff <= 6 and lenDff > 0):
-      return outCardsCredencialesSFSF(rowDff.drop_duplicates('Tipo Acceso'))
+      return outCardsCredencialesSFSF(rowDff)
     elif lenDff >= 7:
       return {'text': 'Srry hay muchas credenciales y aún soy incapaz de mostrarlas'}
     else:
       return {'text': 'Wut? Aún no entiendo'}
       #return {'text': 'Existen muchas credenciales de %s para %s' % (dff.loc[cliente & ambiente]['Tipo Acceso'].iloc[0], dff.loc[cliente].Cliente.iloc[0]) }
-      
+
   else: 
 
-    rowDff = dff.loc[cliente_isPassword]
+    rowDff = dff.loc[cliente_isPassword_comentario].drop_duplicates(['Cliente','Tipo Acceso'])
     lenDff = len(rowDff)
 
     if (lenDff <= 6 and lenDff > 0):
-      return outCardsCredencialesSFSF(rowDff.drop_duplicates('Tipo Acceso'))
+      return outCardsCredencialesSFSF(rowDff)
     elif lenDff >= 7:
       return {'text': 'Srry hay muchas credenciales para %s y aún soy incapaz de mostrarlas' % (rowDff.Cliente.iloc[0])}
     else:
