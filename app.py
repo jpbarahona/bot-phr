@@ -18,8 +18,9 @@ def on_event():
   elif event['type'] == 'MESSAGE':
     text = event['message']['text']
   else:
-    return
-  return json.jsonify( {'cards': bc.BuscarCredenciales(text)} )
+    return 
+  
+  return json.jsonify( bc.BuscarCredenciales(text) )
 
 if __name__ == '__main__':
   app.run()

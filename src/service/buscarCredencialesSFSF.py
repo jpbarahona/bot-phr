@@ -16,6 +16,15 @@ worksheet = sheet.worksheet(config['archivo']['credencialesSFSF']['workSheet'])
 
 wsheet = worksheet.get_all_values()
 
+# header -> primera fila es un comentario
+df = pandas.DataFrame.from_records(wsheet[1:])
+
+# .values -> array o matriz
+header = (df.loc[df[0] == 'Cliente']).values[0]
+dataSet = (df.loc[df[0] != 'Cliente']).values
+
+dff = pandas.DataFrame.from_records(dataSet, columns = header)
+
 # out json
 def outCardsCredencialesSFSF(payload):
     cards = []
@@ -62,22 +71,26 @@ def outCardsCredencialesSFSF(payload):
               }
         )
 
-    return cards
+    return {'cards': cards}
 
-def BuscarCredenciales (cliente, ambiente = ''): 
-  # header -> primera fila es un comentario
-  df = pandas.DataFrame.from_records(wsheet[1:])
+def BuscarCredenciales (pCliente, pAmbiente = ''): 
+  # case = false, no sensitive case
+  cliente = dff.Cliente.str.contains(pCliente, case=False)
 
-  # .values -> array o matriz
-  header = (df.loc[df[0] == 'Cliente']).values[0]
-  dataSet = (df.loc[df[0] != 'Cliente']).values
+  if (pAmbiente != ''):
+    ambiente = dff['Tipo Acceso'].str.contains(pAmbiente, case=False)
 
-  dff = pandas.DataFrame.from_records(dataSet, columns = header)
-  cliente = dff.Cliente.str.upper() == cliente.upper()
+    if len(dff.loc[cliente & ambiente]) < 7:
+      return outCardsCredencialesSFSF(dff.loc[cliente & ambiente]) 
+    else:
+      return: {'text': 'Srry hay muchas credenciales y soy incapaz de mostrarlas :face with head-bandage:'}
+      #return {'text': 'Existen muchas credenciales de %s para %s' % (dff.loc[cliente & ambiente]['Tipo Acceso'].iloc[0], dff.loc[cliente].Cliente.iloc[0]) }
 
-  if (ambiente != ''):
-    ambiente = dff['Tipo Acceso'].str.upper() == ambiente.upper()
+  else: 
 
-    return outCardsCredencialesSFSF(dff.loc[cliente & ambiente])
-  else:        
-    return outCardsCredencialesSFSF(dff.loc[cliente])
+    if len(dff.loc[cliente]) < 7:
+      return outCardsCredencialesSFSF(dff.loc[cliente])
+    else:
+      return: {'text': 'Srry hay muchas credenciales y soy incapaz de mostrarlas :face with head-bandage:'}
+      #return {'text': 'Existen muchas credenciales para %s, especifica si necesitas DEV TST o PRD' % (dff.loc[cliente].Cliente.iloc[0])}       
+    
