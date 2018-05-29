@@ -80,17 +80,21 @@ def BuscarCredenciales (pCliente, pAmbiente = ''):
   if (pAmbiente != ''):
     ambiente = dff['Tipo Acceso'].str.contains(pAmbiente, case=False)
 
-    if len(dff.loc[cliente & ambiente]) < 7:
+    if len(dff.loc[cliente & ambiente]) <= 6 & len(dff.loc[cliente]) > 1:
       return outCardsCredencialesSFSF(dff.loc[cliente & ambiente]) 
+    elif len(dff.loc[cliente & ambiente]) >= 7:
+      return {'text': 'Srry hay muchas credenciales y soy incapaz de mostrarlas :face with head-bandage:'}
     else:
-      return: {'text': 'Srry hay muchas credenciales y soy incapaz de mostrarlas :face with head-bandage:'}
+      return {'text': 'Wut? Aún no entiendo'}
       #return {'text': 'Existen muchas credenciales de %s para %s' % (dff.loc[cliente & ambiente]['Tipo Acceso'].iloc[0], dff.loc[cliente].Cliente.iloc[0]) }
 
   else: 
 
-    if len(dff.loc[cliente]) < 7:
+    if len(dff.loc[cliente]) <= 6 & len(dff.loc[cliente]) > 1:
       return outCardsCredencialesSFSF(dff.loc[cliente])
+    elif len(dff.loc[cliente]) >= 7:
+      return {'text': 'Srry hay muchas credenciales para %s y soy incapaz de mostrarlas :face with head-bandage:' % (dff.loc[cliente].Cliente.iloc[0])}
     else:
-      return: {'text': 'Srry hay muchas credenciales y soy incapaz de mostrarlas :face with head-bandage:'}
+      return {'text': 'Wut? Aún no entiendo'}
       #return {'text': 'Existen muchas credenciales para %s, especifica si necesitas DEV TST o PRD' % (dff.loc[cliente].Cliente.iloc[0])}       
     
