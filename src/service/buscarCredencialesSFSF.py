@@ -90,7 +90,7 @@ def BuscarCredenciales (pCliente, pAmbiente = ''):
     lenDff = len(rowDff)
 
     if (lenDff <= 6 and lenDff > 0):
-      return outCardsCredencialesSFSF(rowDff).drop_duplicates('Tipo Acceso')
+      return outCardsCredencialesSFSF(rowDff.drop_duplicates('Tipo Acceso'))
     elif lenDff >= 7:
       return {'text': 'Srry hay muchas credenciales y aún soy incapaz de mostrarlas'}
     else:
@@ -103,7 +103,7 @@ def BuscarCredenciales (pCliente, pAmbiente = ''):
     lenDff = len(rowDff)
 
     if (lenDff <= 6 and lenDff > 0):
-      return outCardsCredencialesSFSF(rowDff).drop_duplicates('Tipo Acceso')
+      return outCardsCredencialesSFSF(rowDff.drop_duplicates('Tipo Acceso'))
     elif lenDff >= 7:
       return {'text': 'Srry hay muchas credenciales para %s y aún soy incapaz de mostrarlas' % (rowDff.Cliente.iloc[0])}
     else:
