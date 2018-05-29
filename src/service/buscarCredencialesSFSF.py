@@ -76,7 +76,7 @@ def outCardsCredencialesSFSF(payload):
 def BuscarCredenciales (pCliente, pAmbiente = ''): 
 
   # case = false, no sensitive case
-  cliente = dff.Cliente.str.contains(cliente, case=False)
+  cliente = dff.Cliente.str.contains(pCliente, case=False)
   isPassword = dff['Contraseña'] != ''
   
   cliente_isPassword = (cliente & isPassword)
