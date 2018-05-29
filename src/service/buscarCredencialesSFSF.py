@@ -64,12 +64,6 @@ def outCardsCredencialesSFSF(payload):
                                 'topLabel': 'Contraseña',
                                 'content': row.Contraseña
                               }
-                          },
-                          {
-                              'keyValue': {
-                                'topLabel': 'Comentario',
-                                'content': row['']
-                              }
                           }
                     ]
                   }
