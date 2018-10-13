@@ -1,9 +1,9 @@
 {
 	"api": {
-		"db": "bot-test",
+		"db": "bot-phr-hangouts-test",
 		"hangouts": {
 			"collections":{
-				"messages": "hangouts_event_messages"
+				"messages": "hangouts_event_messages_request"
 			}
 		}
 	}
