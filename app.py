@@ -12,7 +12,7 @@ app = Flask(__name__)
 def on_event():
   event = request.get_json()
   
-  #hangouts.guardarMensaje(event)
+  hangouts.guardarMensaje(event)
 
   if event['type'] == 'ADDED_TO_SPACE' and event['space']['type'] == 'ROOM':
     return json.jsonify({'text': 'Hola! Por ahora, solo puedo ayudar con credenciales de SFSF... Preguntas como entel, abastible, arauco, etc...'})
