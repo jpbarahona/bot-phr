@@ -2,7 +2,7 @@
 	"scope": ["https://www.googleapis.com/auth/drive.readonly"],
 	"archivo":{
 		"credencialesSFSF":{
-			"sheet": "Test SFSF Accesos",
+			"sheet": "SFSF Accesos",
 			"workSheet": "SFSF"
 		}
 	}
