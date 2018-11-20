@@ -43,7 +43,7 @@ def outCardsCredencialesSFSF(payload):
                           'buttons': [
                                   {
                                     'textButton': {
-                                      'text': row.Link,
+                                      'text': 'Link '+ row['Tipo Acceso'],
                                       'onClick': {
                                         'openLink': {
                                           'url': row.Link
@@ -52,6 +52,12 @@ def outCardsCredencialesSFSF(payload):
                                     }
                                   }
                               ]
+                          },
+                          {
+                              'keyValue': {
+                                'topLabel': 'Link',
+                                'content': row.Link
+                              }
                           },
                           {
                               'keyValue': {
