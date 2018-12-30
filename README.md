@@ -1,6 +1,6 @@
 # Deploy en Heroku
 
-## Dependencias importantes
+## Dependencias importantes to Heroku
 
 ### gunicorn
 Es necesario el archivo Procfile porque permite definir **dynos** (web) que son ligeros contenedores de Linux y que representan a los procesos en la instancia de Heroku, permitiendo levantar correctamente la aplicación

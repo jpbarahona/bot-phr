@@ -13,4 +13,4 @@ pathConfigMongo = './src/mongo/configMongo.json'
 config_file = open(pathConfigMongo,'r')
 config = json.load(config_file)
 
-client = pymongo.MongoClient(os.environ["MONGO_CONNECTION_STRING_TEST"])
+client = pymongo.MongoClient(os.environ["MONGO_CONNECTION_STRING"])

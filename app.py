@@ -23,5 +23,11 @@ def on_event():
   
   return json.jsonify( bc.BuscarCredenciales(text) )
 
+def main():
+  if os.environ['FLASK_ENV'] == 'development':
+      app.run()
+  else:
+      app.run("0.0.0.0", port=80, debug=False)
+
 if __name__ == '__main__':
-  app.run()
+  main()

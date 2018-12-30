@@ -8,7 +8,7 @@ config_file = open('./src/service/config.json','r')
 config = json.load(config_file)
 
 scope = config['scope']
-creds = ServiceAccountCredentials.from_json_keyfile_dict(json.loads(os.environ['CLIENT_SECRET_TEST']),scope)
+creds = ServiceAccountCredentials.from_json_keyfile_dict(json.loads(os.environ['CLIENT_SECRET']),scope)
 client = gspread.authorize(creds)
 
 sheet = client.open(config['archivo']['credencialesSFSF']['sheet'])
