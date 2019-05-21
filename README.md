@@ -10,11 +10,30 @@ Es un gestor de paquetes como npm en Node o bundle en Ruby, y te permite aislar 
 
 Al utilizar pipenv e.g. `pipenv install flask`, genera los archivos Pipfile y Pipfile.lock que son las dependencias del ambiente generado para la aplicación.
 
-## Run Local
+## Run Local (development environment)
+Es una instancia Flask ejecutada en un ambiente pipenv
 
+Hay que tener instalado:
+
+- Python3 versión: 3.7.3
+
+Clonar repositorio:
 ```
 git clone https://github.com/jpbarahona/bot-phr.git
+```
+
+Crear archivo de variables de entorno **.env** en el interior del directorio y agregar:
+```
+FLASK_ENV=development
+```
+
+instalar dependencias de variable
+```
 pipenv install
+```
+
+Ejecutar instancia
+```
 pipenv run python app.js
 ```
 
