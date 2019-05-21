@@ -4,15 +4,20 @@
 from flask import Flask, request, json
 import src.mongo.hangouts as hangouts
 import src.service.buscarCredencialesSFSF as bc
+import os
 
 app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['GET'])
+def index():
+  return 'Hello', 200
 
-def on_event():
+@app.route('/push', methods=['POST'])
+def index_on_event():
   event = request.get_json()
   
-  hangouts.guardarMensaje(event)
+  if os.environ['FLASK_ENV'] != 'development':
+    hangouts.guardarMensaje(event)
 
   if event['type'] == 'ADDED_TO_SPACE' and event['space']['type'] == 'ROOM':
     return json.jsonify({'text': 'Hola! Por ahora, solo puedo ayudar con credenciales de SFSF... Preguntas como entel, abastible, arauco, etc...'})
