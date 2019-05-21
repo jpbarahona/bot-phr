@@ -10,6 +10,11 @@ Es un gestor de paquetes como npm en Node o bundle en Ruby, y te permite aislar 
 
 Al utilizar pipenv e.g. `pipenv install flask`, genera los archivos Pipfile y Pipfile.lock que son las dependencias del ambiente generado para la aplicación.
 
+## Natural Language Processing
+Módulo de la inteligencia artificial dedicado a la interpretación y entendimiento de los textos para rescatar los sentimiento y significados de estos.
+
+Se utiliza la libreria [NLTK](https://www.nltk.org/) que posee funcionalidades del proceso de NLP.
+
 ## Run Local (development environment)
 Es una instancia Flask ejecutada en un ambiente pipenv
 
