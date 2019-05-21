@@ -21,6 +21,7 @@ df = pandas.DataFrame.from_records(wsheet[1:])
 
 # .values -> array o matriz
 header = (df.loc[df[0] == 'Cliente']).values[0]
+
 dataSet = (df.loc[df[0] != 'Cliente']).values
 
 dff = pandas.DataFrame.from_records(dataSet, columns = header)
