@@ -18,7 +18,7 @@ Módulo de la inteligencia artificial dedicado a la interpretación y entendimie
 Se utiliza la libreria [NLTK](https://www.nltk.org/) que posee funcionalidades del proceso de NLP.
 
 ### Pandas
-Pandas es una librería de analítica, utilizado para adminstrar la información de una forma más amigable.
+Librería de analítica, utilizado para adminstrar los datos (datasets) de una forma más amigable.
 
 ## Run Local (development environment)
 Es una instancia Flask ejecutada en un ambiente pipenv
