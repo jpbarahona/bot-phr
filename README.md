@@ -17,7 +17,7 @@ Módulo de la inteligencia artificial dedicado a la interpretación y entendimie
 
 Se utiliza la libreria [NLTK](https://www.nltk.org/) que posee funcionalidades del proceso de NLP.
 
-### Pandas
+### Pandas
 Librería de analítica, utilizado para adminstrar los datos (datasets) de una forma más amigable.
 
 ## Run Local (development environment)
